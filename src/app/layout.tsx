@@ -1,5 +1,7 @@
+import React from 'react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Provider } from '@/context/providers';
 import './globals.css';
 
 const geistSans = Geist({
@@ -25,19 +27,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-          <div className="container mx-auto px-4 py-8">
-            {/* Header */}
-            <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold mb-4">Weekly Activities</h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover amazing activities for every day of the week. Select your favorites and
-                build your perfect schedule.
-              </p>
+        <Provider>
+          <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+            <div className="container mx-auto px-4 py-8">
+              {/* Header */}
+              <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold mb-4">Weekly Activities</h1>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Discover amazing activities for every day of the week. Select your favorites and
+                  build your perfect schedule.
+                </p>
+              </div>
+              {children}
             </div>
-            {children}
           </div>
-        </div>
+        </Provider>
       </body>
     </html>
   );
