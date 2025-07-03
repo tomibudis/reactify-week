@@ -76,7 +76,7 @@ export const WeeklyCardDisplay: React.FC<CharacterCardProps> = ({ filterBy, clas
         <div className="flex justify-center items-center min-h-[200px]">
           <span className="text-gray-500 text-lg text-center">
             No characters found for the selected filter. <br />
-            Please try to another day filter
+            Please try another day filter
           </span>
         </div>
       )}

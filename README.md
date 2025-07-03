@@ -41,10 +41,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-## UI Components
-
-- [shadcn/ui](https://ui.shadcn.com/) is set up. Example: `src/components/ui/button.tsx`.
-
 ## Commit Message Linting
 
 - Commit messages are checked using Commitlint and Husky.
