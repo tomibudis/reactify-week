@@ -9,29 +9,60 @@ import { FilterDays } from '@/constants/filter-days';
 import { useQueryGetAllCharacters } from '@/hooks/query/use-get-all-characters.query';
 import { formatDate } from '@/lib/date-format';
 import { useCharacterState } from '@/hooks/use-character-state';
-import { Check, Plus } from 'lucide-react';
+import { Check, Plus, Trash2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Spinner } from '@/components/ui/spinner';
 
 interface CharacterCardProps {
-  filterByDay?: FilterDays;
+  filterBy?: FilterDays;
   className?: string;
 }
 
-export const WeeklyCardDisplay: React.FC<CharacterCardProps> = () => {
+export const WeeklyCardDisplay: React.FC<CharacterCardProps> = ({ filterBy, className }) => {
   const { data: allCharactersData, isLoading: isLoadingCharacters } = useQueryGetAllCharacters();
-  const { onAdd, data: savedCharData } = useCharacterState();
+  const { onAdd, onDelete, data: savedCharData } = useCharacterState();
 
   const grouped = React.useMemo(() => {
     if (!allCharactersData?.results) return {};
-    return _.groupBy(allCharactersData.results, (char: Character) => char.created.slice(0, 10));
-  }, [allCharactersData]);
+
+    let filteredResults = allCharactersData.results;
+
+    if (filterBy && filterBy !== FilterDays.All) {
+      const dayIndex = [
+        FilterDays.Sunday,
+        FilterDays.Monday,
+        FilterDays.Tuesday,
+        FilterDays.Wednesday,
+        FilterDays.Thursday,
+        FilterDays.Friday,
+        FilterDays.Saturday,
+      ].indexOf(filterBy);
+
+      if (dayIndex !== -1) {
+        filteredResults = filteredResults.filter((char: Character) => {
+          const charDate = new Date(char.created);
+          return charDate.getDay() === dayIndex;
+        });
+      }
+    }
+
+    return _.groupBy(filteredResults, (char: Character) => char.created.slice(0, 10));
+  }, [allCharactersData, filterBy]);
 
   const isSelectedCharacter = (character: Character) => {
     return savedCharData.some((charData) => charData.id === character.id);
   };
   return (
-    <div className="space-y-12">
+    <div className={cn('space-y-12', className)}>
+      {!isLoadingCharacters && Object.keys(grouped).length === 0 && (
+        <div className="flex justify-center items-center min-h-[200px]">
+          <span className="text-gray-500 text-lg text-center">
+            No characters found for the selected filter. <br />
+            Please try to another day filter
+          </span>
+        </div>
+      )}
+
       {isLoadingCharacters && <Spinner />}
 
       {!isLoadingCharacters && (
@@ -86,7 +117,15 @@ export const WeeklyCardDisplay: React.FC<CharacterCardProps> = () => {
                         {char.status}
                       </span>
                     </div>
-                    <div className="flex justify-end mt-4">
+                    <div className="flex justify-end mt-4 gap-3">
+                      {isSelectedCharacter(char) && (
+                        <div
+                          onClick={() => onDelete?.(char.id)}
+                          className="cursor-pointer w-6 h-6 bg-red-400 hover:bg-red-800 rounded-full flex items-center justify-center text-white"
+                        >
+                          <Trash2 size={16} />
+                        </div>
+                      )}
                       <div
                         onClick={() => onAdd(char)}
                         className={cn(

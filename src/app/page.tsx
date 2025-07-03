@@ -19,7 +19,7 @@ export default function Homepage() {
         <FilterDaysDropdown filterBy={filterBy} onChangeFilter={handleChangeFilter} />
       </div>
 
-      <WeeklyCardDisplay />
+      <WeeklyCardDisplay filterBy={filterBy} />
     </>
   );
 }
