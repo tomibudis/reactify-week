@@ -2,7 +2,7 @@
 
 import React from 'react';
 import _ from 'lodash';
-import type { Character } from '@/hooks/query/get-all-characters.query';
+import type { Character } from '@/hooks/query/use-get-all-characters.query';
 
 import { FilterDays } from '@/constants/filter-days';
 import { useQueryGetAllCharacters } from '@/hooks/query/use-get-all-characters.query';

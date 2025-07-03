@@ -1,4 +1,4 @@
-import { Character } from '@/hooks/query/get-all-characters.query';
+import { Character } from '@/hooks/query/use-get-all-characters.query';
 import { generateTags } from '@/lib/ai';
 import { cn } from '@/lib/utils';
 import { Check, Plus, Trash2 } from 'lucide-react';

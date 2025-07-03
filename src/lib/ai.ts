@@ -1,4 +1,4 @@
-import { Character } from '@/hooks/query/get-all-characters.query';
+import { Character } from '@/hooks/query/use-get-all-characters.query';
 
 export function generateTags(char: Character): string[] {
   const tags: string[] = [];

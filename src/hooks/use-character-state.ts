@@ -1,4 +1,4 @@
-import { Character } from '@/hooks/query/get-all-characters.query';
+import { Character } from '@/hooks/query/use-get-all-characters.query';
 import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'saved-characters';
