@@ -13,6 +13,7 @@ export default function Homepage() {
     if (!selectedFilter) return;
     setFilterBy(selectedFilter);
   };
+
   return (
     <>
       <div className="flex flex-wrap gap-4 justify-center mb-8">

@@ -21,16 +21,16 @@ export const useCharacterState = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }, [data]);
 
-  const onAdd = (character: Character) => {
+  const onSave = (character: Character) => {
     setData((prev) => {
       if (prev.some((c) => c.id === character.id)) return prev;
       return [...prev, character];
     });
   };
 
-  const onDelete = (id: number) => {
+  const unSave = (id: number) => {
     setData((prev) => prev.filter((c) => c.id !== id));
   };
 
-  return { data, onAdd, onDelete };
+  return { data, onSave, unSave };
 };

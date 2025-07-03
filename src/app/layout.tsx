@@ -32,10 +32,12 @@ export default function RootLayout({
             <div className="container mx-auto px-4 py-8">
               {/* Header */}
               <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold mb-4">Weekly Activities</h1>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                <h1 className="text-4xl font-bold my-10">Reactify-Week</h1>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                   Discover amazing activities for every day of the week. Select your favorites and
-                  build your perfect schedule.
+                  build your perfect schedule. Our AI-powered system generates smart tags and
+                  personalized recommendation cards to help you find the best activities tailored
+                  just for you.
                 </p>
               </div>
               {children}
